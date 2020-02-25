@@ -10,7 +10,7 @@ public class JavaUdpServer {
     {
         System.out.println("JAVA UDP SERVER");
         DatagramSocket socket = null;
-        int portNumber = 9009;
+        int portNumber = 9010;
 
         try{
             socket = new DatagramSocket(portNumber);
@@ -20,8 +20,15 @@ public class JavaUdpServer {
                 Arrays.fill(receiveBuffer, (byte)0);
                 DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
                 socket.receive(receivePacket);
-                String msg = new String(receivePacket.getData());
-                System.out.println("received msg: " + msg);
+                int msg = new String(receivePacket.getData());
+
+                ByteBuffer byteBuffer = ByteBuffer.allocate(4);
+                byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+                byteBuffer.putInt(msg);
+                byte[] result = byteBuffer.array();
+
+                System.out.println("received msg: " + Arrays.toString(result));
+
             }
         }
         catch(Exception e){
