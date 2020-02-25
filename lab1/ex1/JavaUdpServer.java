@@ -1,3 +1,4 @@
+import java.io.ByteArrayOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -22,6 +23,16 @@ public class JavaUdpServer {
                 String msg = new String(receivePacket.getData());
                 System.out.println("received msg: " + msg);
 
+                
+                
+               
+
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
+                outputStream.write("Seniorita ".getBytes());
+                outputStream.write(receiveBuffer);
+                receiveBuffer = outputStream.toByteArray( );
+
+            
                 InetAddress address = receivePacket.getAddress();
                 int port = receivePacket.getPort();
                 DatagramPacket respondPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length, address,port);
