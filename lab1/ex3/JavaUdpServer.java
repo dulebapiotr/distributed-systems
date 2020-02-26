@@ -1,8 +1,8 @@
-import java.io.ByteArrayOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.net.InetAddress;
 
 public class JavaUdpServer {
 
@@ -20,14 +20,20 @@ public class JavaUdpServer {
                 Arrays.fill(receiveBuffer, (byte)0);
                 DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
                 socket.receive(receivePacket);
-                int msg = new String(receivePacket.getData());
+                //String msg = new String(receivePacket.getData());
+                //System.out.println("received msg: " + msg);
 
-                ByteBuffer byteBuffer = ByteBuffer.allocate(4);
-                byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-                byteBuffer.putInt(msg);
-                byte[] result = byteBuffer.array();
+        
+                
+                int nb = ByteBuffer.wrap(receiveBuffer).getInt();
+                int reverse = Integer.reverseBytes(nb);
+                System.out.println("received msg: " + Integer.toString(reverse));
 
-                System.out.println("received msg: " + Arrays.toString(result));
+                byte[] respondBuffer = ByteBuffer.allocate(4).putInt(reverse+1).array();
+                InetAddress address = receivePacket.getAddress();
+                int port = receivePacket.getPort();
+                DatagramPacket respondPacket = new DatagramPacket(respondBuffer, respondBuffer.length, address,port);
+                socket.send(respondPacket);
 
             }
         }
