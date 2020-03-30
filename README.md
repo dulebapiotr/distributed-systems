@@ -54,6 +54,7 @@ Dodatkowe wymagania
 Konfiguracja własnego środowiska do rozwijania aplikacji internetowych z wykorzystaniem ulubionego IDE.
 Prezentacja wykorzystywanych zapytań HTTP klient-serwer i serwer-serwis_publiczny z wykorzystaniem POSTMANa (do oddania proszę mieć je już zapisane).
 ## Lab 3 - RabbitMQ
+### Home Project:
 Zadanie polega na implementacji, z użyciem RabbitMQ, systemu pośredniczącego pomiędzy agencjami kosmicznymi (Agencja), a dostawcami usług transportu kosmicznego (Przewoźnik). Agencje kosmiczne zlecają wykonanie trzech typów usług: przewóz osób, przewóz ładunku, umieszczenie satelity na orbicie.
 
 W związku z podpisanym porozumieniem, obowiązują następujące zasady współpracy:
