@@ -73,6 +73,7 @@ W wersji premium tworzonego systemu dostępny jest dodatkowy moduł administracy
 Dostosowanie się do unijnych wymagań w zakresie oprogramowania dla przemysłu kosmicznego wymaga, aby do projektu załączona została dokumentacja w postaci schematu działania systemu. Schemat powinien uwzględniać:
 - użytkowników, exchange'e, kolejki, klucze użyte przy wiązaniach
 - schemat musi mieć postać elektroniczną, nie może to być skan odręcznego rysunku
+![alt text](https://github.com/dulebapiotr/distributed-systems/blob/master/home3/SystemDiagram.pdf "Schemat gotowego systemu.")
 
 Scenariusz prezentacji zadania:
 - 2 agencje kosmiczne
