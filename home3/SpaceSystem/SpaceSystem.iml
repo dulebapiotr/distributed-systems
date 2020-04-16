@@ -17,5 +17,15 @@
         <jarDirectory url="file://$MODULE_DIR$/../6 semestr/lab_rabbitmq" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../6 semestr/lab_rabbitmq" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../../../6 semestr/lab_rabbitmq" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>

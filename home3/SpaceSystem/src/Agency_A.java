@@ -30,9 +30,9 @@ public class Agency_A {
         channel.exchangeDeclare(ORDER_ACK_EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
         channel.exchangeDeclare(ADMIN_EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
 
-        String ackQueueName = channel.queueDeclare("ack_queue", false, false, false, null).getQueue();
+        String ackQueueName = channel.queueDeclare(agencyName+"_ack_queue", false, false, false, null).getQueue();
         String adminQueueName = channel.queueDeclare(agencyName+"_admin_queue_carrier", false, false, false, null).getQueue();
-        channel.queueBind("ack_queue", ORDER_ACK_EXCHANGE_NAME, agencyName);
+        channel.queueBind(ackQueueName, ORDER_ACK_EXCHANGE_NAME, agencyName);
         channel.queueBind(adminQueueName, ADMIN_EXCHANGE_NAME, "AGENCY.#");
         System.out.println("Created queue: " + ackQueueName);
         System.out.println("Created queue: " + adminQueueName);
@@ -43,16 +43,13 @@ public class Agency_A {
                 String message = new String(body, "UTF-8");
                 System.out.println("Received :" + message);
                 channel.basicAck(envelope.getDeliveryTag(), false);
-
-
             }
         };
-
-        int orderID = (int)(Math.random() * ((100 - 2) + 1)) + 2;
 
         channel.basicConsume(ackQueueName, false, consumer);
         channel.basicConsume(adminQueueName, false, consumer);
 
+        int orderID = 1;
         while (true) {
             System.out.println("Enter cargo type: ");
             String key = br.readLine();

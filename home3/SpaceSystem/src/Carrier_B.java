@@ -31,7 +31,7 @@ public class Carrier_B {
         Connection connection = factory.newConnection();
 
         Channel channel = connection.createChannel();
-        //channel.basicQos(1,false);
+        channel.basicQos(1,false);
 
         // exchange
         String CARGO_EXCHANGE_NAME = "cargo_exchange";
@@ -61,12 +61,6 @@ public class Carrier_B {
         System.out.println("Created queue: " + adminQueueName);
 
 
-
-
-
-
-
-
         // consumer (message handling)
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
@@ -76,17 +70,15 @@ public class Carrier_B {
                 System.out.println("Received order from: "+data[0]);
                 System.out.println("OrderID: "+data[1]);
                 System.out.println("Info: "+data[2]);
-                int timeToSleep = (int)(Math.random() * ((10 - 2) + 1)) + 2;
-                try {
-                    Thread.sleep(timeToSleep * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                int timeToSleep = (int)(Math.random() * ((10 - 2) + 1)) + 2;
+//                try {
+//                    Thread.sleep(timeToSleep * 1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 System.out.println("Processed: " + message);
                 channel.basicAck(envelope.getDeliveryTag(), false);
-                channel.basicPublish(ORDER_ACK_EXCHANGE_NAME, data[0],null, ("ACK :"+message).getBytes("UTF-8"));
-
-
+                channel.basicPublish(ORDER_ACK_EXCHANGE_NAME, data[0],null, ("ACK:"+carrierName+":"+message).getBytes("UTF-8"));
             }
         };
 
