@@ -61,6 +61,7 @@ public class Carrier_B {
         System.out.println("Created queue: " + adminQueueName);
 
 
+
         // consumer (message handling)
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
