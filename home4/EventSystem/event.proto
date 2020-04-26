@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package event;
+option java_multiple_files = true;
+option java_package = "event.grpc.gen";
+option java_outer_classname = "EventProto";
+
+enum Type{
+    CONCERT = 0;
+    PARTY = 1;
+    CONFERENCE = 2;
+    SPORT = 3;
+}
+
+message Address{
+    string country = 1;
+    string city = 2;
+    string street = 3;
+    string houseNumber = 4;
+}
+
+message Date{
+    int32 year = 1;
+    int32 month = 2;
+    int32 day = 3;
+    int32 hour = 4;
+    int32 min = 5;
+}
+
+message Event {
+    repeated Type type =1;
+    Date date = 2;
+    Address address = 3;
+    string info = 4;
+
+}
+
+message SubscribeRequest{
+    string city = 1;
+    repeated Type type = 2;
+}
+
+service EventSubscribe{
+    rpc subscribe(SubscribeRequest) returns (stream Event){}
+}
